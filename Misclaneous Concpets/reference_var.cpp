@@ -1,3 +1,7 @@
+//A reference variable is a variable that refers to, or provides
+//an alias for, another variable or memory location. It essentially acts 
+//as an alternative name for an existing variable.
+
 #include <bits/stdc++.h>
 using namespace std;
 
