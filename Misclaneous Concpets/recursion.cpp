@@ -90,20 +90,34 @@ int linear(int arr[], int size, int key)
         return x + 1;
   }
 }
+void reverse(string &str,int start, int end)
+{
+  if(start>end)
+  {
+    return ;
+  }
+  swap(str[start], str[end]);
+  start++;
+  end--;
+  reverse(str, start, end);
+}
 int main()
 {
   // cout<<power(4);
   // cout<<fib(7);
-  int arr[]={1,2,3,4,5};
+  // int arr[]={1,2,3,4,5};
   // isSorted(arr, 5)?cout<<"yes":cout<<"no";
   // cout<<sum(arr, 5);
-  if(binary(arr, 0, 5, 4)==-1)
-  {
-    cout<<"Not found"<<endl;
-  }
-  else
-  {
-    cout<<"found"<<binary(arr,0,  5, 4)<<endl;
-  }
+//  if(binary(arr, 0, 5, 4)==-1)
+//   {
+//     cout<<"Not found"<<endl;
+//   }
+//   else
+//   {
+//     cout<<"found"<<binary(arr,0,  5, 4)<<endl;
+//   } 
+  string name = "srijan";
+  reverse(name, 0, name.length()-1);
+  cout<<name;
   exit(0);
 }
