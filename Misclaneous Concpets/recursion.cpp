@@ -49,6 +49,27 @@ int sum(int arr[], int size)
   arr[1]=arr[0]+arr[1];
   return sum(arr+1, size-1);
 }
+int binary(int arr[], int start, int end, int key)
+{
+    int mid=start+(end-start)/2;
+
+  if(start>end)
+  {
+    return -1;
+  }
+  else if(key==arr[mid])
+  {
+    return mid;
+  }
+  else if(key>arr[mid])
+  {
+    binary(arr, mid, end, key);
+  }
+  else if(key<arr[mid])
+  {
+    binary(arr, start, mid, key);
+  }
+}
 int linear(int arr[], int size, int key)
 {
    if(size==0)
@@ -76,13 +97,13 @@ int main()
   int arr[]={1,2,3,4,5};
   // isSorted(arr, 5)?cout<<"yes":cout<<"no";
   // cout<<sum(arr, 5);
-  if(linear(arr, 5, 4)==-1)
+  if(binary(arr, 0, 5, 4)==-1)
   {
     cout<<"Not found"<<endl;
   }
   else
   {
-    cout<<"found"<<linear(arr, 5, 4)<<endl;
+    cout<<"found"<<binary(arr,0,  5, 4)<<endl;
   }
   exit(0);
 }
