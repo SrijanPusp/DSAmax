@@ -101,6 +101,64 @@ void reverse(string &str,int start, int end)
   end--;
   reverse(str, start, end);
 }
+void printarr(int arr[], int size)
+{
+  int i=0;
+  while(i<size)
+  {
+    cout<<arr[i]<<" ";
+    i++;
+  }
+}
+bool palindrome(string str, int start, int end)
+{
+  if(start>=end)
+  {
+    return 1;
+  }
+  if(str[start]!=str[end])
+  {
+    return 0;
+  }
+  return palindrome(str, start+1, end-1);
+}
+int ModularExponentation(int a, int b)
+{
+  if(a==1||b==0)
+  {
+    return 1;
+  }
+  int ans = ModularExponentation(a, b/2);
+  if(b%2==0)
+  {
+    return ans*ans;
+  }
+  else if(b%2==1)
+  {
+    return a*ans*ans;
+  }
+}
+void Bubble(int arr[], int size)
+{
+  if(size<=1)
+  {
+    return;
+  }
+  int i=0;
+  while(i<size)
+  {
+    if(arr[i]>arr[i+1])
+    {
+      swap(arr[i], arr[i+1]);
+    }
+    i++;
+  }
+  Bubble(arr, size-1);
+}
+void Merge(int arr[], int size)
+{
+  
+}
 int main()
 {
   // cout<<power(4);
@@ -116,8 +174,13 @@ int main()
 //   {
 //     cout<<"found"<<binary(arr,0,  5, 4)<<endl;
 //   } 
-  string name = "srijan";
-  reverse(name, 0, name.length()-1);
-  cout<<name;
+  // string str = "aibohphobia";
+  // reverse(name, 0, name.length()-1);
+  // palindrome(str, 0, str.length()-1)?cout<<"yes":cout<<"no";
+  // cout<<ModularExponentation(3, 3);
+  int arr[7]={2,3,7,2,9,5,17};
+  Bubble(arr, 7);
+  Merge(arr, 7);
+  printarr(arr, 7);
   exit(0);
 }
