@@ -155,9 +155,95 @@ void Bubble(int arr[], int size)
   }
   Bubble(arr, size-1);
 }
-void Merge(int arr[], int size)
+void merge(int arr[], int left, int mid, int right) {
+    int len1 = mid - left + 1;
+    int len2 = right - mid;
+    // Temporary arrays to hold the two halves
+    int leftArray[len1];
+    int rightArray[len2];
+
+    // Copy data into the temporary arrays
+    for (int i = 0; i < len1; i++)
+        leftArray[i] = arr[left + i];
+    for (int i = 0; i < len2; i++)
+        rightArray[i] = arr[mid + 1 + i];
+
+    // Merging the temporary arrays back into the original array
+    int i = 0, j = 0, k = left;
+    while (i < len1 && j < len2) {
+        if (leftArray[i] <= rightArray[j]) {
+            arr[k] = leftArray[i];
+            i++;
+        } else {
+            arr[k] = rightArray[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < len1) {
+        arr[k] = leftArray[i];
+        i++;
+        k++;
+    }
+    while (j < len2) {
+        arr[k] = rightArray[j];
+        j++;
+        k++;
+    }
+}
+void mergeSort(int arr[], int left, int right)//variations in interview
+ {
+    if (left >= right) return; // Base case: single element or empty array
+
+    int mid = left + (right - left) / 2; // Find the middle point
+
+    // Recursively sort the two halves
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+
+    // Merge the two sorted halves
+    merge(arr, left, mid, right);
+}
+int partition(int *arr, int start, int end)//sometimes, direct in interview
 {
-  
+  int pivot = arr[start];
+  int index=0;
+  for(int i=start; i<=end; i++)
+  {
+    if(pivot>arr[i])
+    {
+      index++;
+    }
+  }
+  int pivotindex= start + index;
+  swap(arr[pivotindex], arr[start]);
+  int i=start, j=end; 
+  while(i<pivotindex && j>pivotindex)
+  {
+    while(arr[i]<=pivot)
+    {
+      i++;
+    }
+    while(arr[j]>pivot)
+    {
+      j--;
+    }
+    if(i<pivotindex && j>pivotindex)
+    {
+      swap(arr[i++], arr[j--]);
+    }
+  }
+  return pivotindex;
+}
+void quickSort(int arr[], int s, int e)
+{
+  if(s>=e)
+  {
+    return;
+  }
+  int p = partition(arr, s, e);
+  quickSort(arr, s, p-1);
+  quickSort(arr, p+1, e);
 }
 int main()
 {
@@ -166,21 +252,22 @@ int main()
   // int arr[]={1,2,3,4,5};
   // isSorted(arr, 5)?cout<<"yes":cout<<"no";
   // cout<<sum(arr, 5);
-//  if(binary(arr, 0, 5, 4)==-1)
-//   {
-//     cout<<"Not found"<<endl;
-//   }
-//   else
-//   {
-//     cout<<"found"<<binary(arr,0,  5, 4)<<endl;
-//   } 
+  //  if(binary(arr, 0, 5, 4)==-1)
+  //   {
+  //     cout<<"Not found"<<endl;
+  //   }
+  //   else
+  //   {
+  //     cout<<"found"<<binary(arr,0,  5, 4)<<endl;
+  //   } 
   // string str = "aibohphobia";
   // reverse(name, 0, name.length()-1);
   // palindrome(str, 0, str.length()-1)?cout<<"yes":cout<<"no";
   // cout<<ModularExponentation(3, 3);
   int arr[7]={2,3,7,2,9,5,17};
-  Bubble(arr, 7);
-  Merge(arr, 7);
+  // Bubble(arr, 7);
+  // mergeSort(arr, 0, 7);
+  quickSort(arr, 0, 6);
   printarr(arr, 7);
   exit(0);
 }
