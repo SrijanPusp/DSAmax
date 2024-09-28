@@ -16,8 +16,67 @@ class Node
     this->next = NULL;
   }
 };
+//taking in head as reference cause i want changes in actual list
+void InsertAtHead(Node* &head, int d)
+{
+  // creating a new node here
+  Node* temp = new Node(d);
+  //adding the address of current head, or first node in address box of made up node
+  temp -> next = head;
+  // changing the pointer "head" to the new made box
+  head = temp;
+}
+void PrintList(Node* head)
+{
+  while(head != NULL)
+  {
+    cout<<"|"<<head->data<<" "<<head->next<<"|-->";
+    head = head->next;
+  }
+  cout<<endl;
+}
+void InsertAtTail(Node* &tail, int d)
+{
+  Node* temp = new Node(d);
+  tail -> next = temp;
+  tail = temp;
+}
+void InsertAtPosition(Node* &tail, Node* &head, int n, int d)
+{
+  if(n==1)
+  {
+    InsertAtHead(head, d);
+    return;
+  }
+  Node * temp = head;
+  int i=0;
+  while(i<n)
+  {
+    temp = temp->next;
+    i++;
+  }
+  if(temp->next == NULL)
+  {
+    InsertAtTail(tail, d);
+    return;
+  }
+  Node* temp2 = new Node(d);
+  temp2->next=head->next;
+  head->next=temp2;
+}
 int main()
 {
   Node* first = new Node(78);
-  cout<<"data = "<<first->data<<" and location of next node = "<< first->next<<"."<<endl;
+  // cout<<"data = "<<first->data<<" and location of next node = "<< first->next<<"."<<endl;
+  Node* head = first;
+  Node* tail = first;
+  InsertAtHead(head, 77);
+  InsertAtHead(head, 76);
+  InsertAtTail(tail, 79);
+  InsertAtTail(tail, 80);
+  InsertAtPosition(tail, head, 3, 77);
+  InsertAtHead(head, 74);
+  InsertAtPosition(tail, head, 2, 75);
+  PrintList(head);
+  exit(0);
 }
