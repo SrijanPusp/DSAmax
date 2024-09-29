@@ -67,6 +67,35 @@ void InsertAtPos(int pos, Node* &head ,Node* &tail, int data)
   temp->next = temp2;
 
 }
+void DeletePos(int pos, Node* &head)
+{
+  if(pos==1)
+  {
+    Node* temp = head->next;
+    head = temp->next;
+    head->prev = NULL; 
+    delete temp;
+  }
+  else
+  {
+    Node* curr = head;
+    Node* prev = NULL;
+
+    int cnt = 1;
+    while(cnt < pos) {
+        prev = curr;
+        curr = curr -> next;
+        cnt++;
+    }
+
+    curr -> prev = NULL;
+    prev -> next = curr -> next;
+    curr -> next = NULL;
+
+    delete curr;
+
+  }
+}
 int main()
 {
   Node* node = new Node(10);
@@ -80,6 +109,9 @@ int main()
   InsertAtTail(tail, 13);
   InsertAtPos(3, head, tail, 9);
   InsertAtPos(5, head, tail, 11);
+  InsertAtPos(9, head, tail, 14);
+  print(head);
+  DeletePos(5, head);
   print(head);
   exit(0);
 }
