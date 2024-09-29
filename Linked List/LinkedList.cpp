@@ -99,7 +99,11 @@ int main()
   InsertAtHead(head, 74);
   InsertAtPosition(tail, head, 2, 75);
   PrintList(head);
+  cout<<head->data<<" ";
+  cout<<tail->data;
   DeletePosition(head, 1);
   PrintList(head);
+  cout<<head->data<<" ";
+  cout<<tail->data;
   exit(0);
 }
